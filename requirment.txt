@@ -1,0 +1,11 @@
+Django>=3.2,<4.0
+djangorestframework>=3.12.4
+psycopg2>=2.8.6
+django-cors-headers>=3.7.0
+django-filter>=2.4.0
+djangorestframework-gis>=0.16
+geopy>=2.1.0
+bokeh>=2.4.0
+gunicorn>=20.1.0
+whitenoise>=5.2.0
+pillow>=8.2.0

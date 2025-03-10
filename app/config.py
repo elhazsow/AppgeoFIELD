@@ -10,4 +10,4 @@ EE_ACCOUNT = 'sowelhaz@webapp644378.iam.gserviceaccount.com'
 EE_PRIVATE_KEY_FILE = 'data/ee_config/clé_EarthEngine.json'
 
 EE_CREDENTIALS = ee.ServiceAccountCredentials(EE_ACCOUNT, EE_PRIVATE_KEY_FILE)
-print('oui')
+# print('oui')

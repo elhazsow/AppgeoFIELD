@@ -7,9 +7,7 @@ from django.core.serializers import serialize
 # from django.contrib.gis.geos import GEOSGeometry
 # from django.contrib.gis.gdal import CoordTransform, SpatialReference
 
-from bokeh.models import ColumnDataSource,BoxZoomTool, SaveTool, ResetTool
-from bokeh.embed import components
-from bokeh.plotting import figure
+
 import numpy as np
 # import math
 import datetime
@@ -22,6 +20,7 @@ from app.earthengine import ee_get_image, get_map_tiles
 import time
 
 from shapely import to_geojson, geometry
+from .bokey_utils import bokeh_chart
 
 
 
@@ -88,9 +87,6 @@ def chart_view(request,id):
     # print(bbox_)
     
 
-    
-
-    
     # ee image tile
     """Request an image from Earth Engine and render it to a web page."""
     ee.Initialize(config.EE_CREDENTIALS)
@@ -121,10 +117,6 @@ def chart_view(request,id):
     
  
     
-
-
-   
-    
     # 'ndwi': {
     #     'mapid':ndwi['mapid'],
     #     'token':ndwi['token']
@@ -136,13 +128,9 @@ def chart_view(request,id):
     # }
    
     
-    
-    
-    
-    
-    
-    
-    # bokeh chart
+    # bokeh charts
+    data = {'dates':dates, 'ndvi':ndvi}
+    chart_ndvi = bokeh_chart(data, zone, "NDVI")
    
     
     context={}
@@ -152,70 +140,7 @@ def chart_view(request,id):
     
     # cds= ColumDatasource(data=data)
     
-    ########## create a new plot with a title and axis labels
-    fig = figure(title= title, height=300, width=300, x_axis_type="datetime",tools=[BoxZoomTool(), SaveTool(), ResetTool()])
-    
-    ####### add a line renderer with legend and line thickness
-    
-    fig.line(dates, ndvi, legend_label="NDVI", line_width=2, color="green")
-    
-    ###### fig config
-    fig.sizing_mode = "scale_width"
-    fig.background_fill_color = "beige"
-    fig.background_fill_alpha = 0.2
-    fig.border_fill_alpha=0.0
-    fig.toolbar.logo = None
-    fig.toolbar.autohide = True
-    #####fig title
-    fig.title.text_color = "white"
-    fig.title.text_font = "times"
-    fig.title.text_font_style = "bold"
-    fig.title.text_font_size = "1rem"
-    fig.title.align = "center"
-    
-    ###########legend######################
-    
-    # fig.legend.title = 'Stock'
-    # fig.legend.title_text_font_style = "bold"
-    # fig.legend.title_text_font_size = "20px"
-    # fig.legend.title="NVDI"
-    fig.legend.location = "top_right"
-    fig.legend.background_fill_color = "black"
-    fig.legend.background_fill_alpha = 0.1
-    fig.legend.border_line_width = 0
-    fig.legend.label_text_color="#e6e6ef"
-    fig.legend.label_text_font_size = "10px"
-    fig.legend.click_policy="hide"
-    
-    ######### change just some things about the x-grid
-    fig.xgrid.grid_line_color = None
-    # fig.xgrid.grid_line_alpha = 0.1
-    
-    ########## change just some things about the y-grid
-    # fig.ygrid.grid_line_color = None
-    fig.ygrid.grid_line_alpha = 0.1
-    
-    ########change just some things about the x-axis
-    fig.xaxis.axis_label = "Dates"
-    fig.xaxis.axis_line_width = 1
-    fig.xaxis.axis_line_color = "white"
-    fig.xaxis.major_label_text_color = "white"
-    # fig.yaxis.major_label_orientation = math.pi/4
-    fig.xaxis.axis_label_text_color = "white"
 
-    ########### change just some things about the y-axis
-    fig.yaxis.axis_label = "NDVI"
-    fig.yaxis.major_label_text_color = "white"
-    fig.yaxis.axis_line_color = "white"
-    fig.yaxis.axis_label_text_color = "white"
-    
-    ######### change things on all axes
-    fig.axis.minor_tick_in = -3
-    fig.axis.minor_tick_out = 6
-
-    
-    ######### embed the fig
-    script, div = components(fig)
     
     ###context
     props = {'nom':zone.nom,
@@ -223,8 +148,8 @@ def chart_view(request,id):
            'arret_dec1': zone.arret_dec1, 
         }
     props=json.dumps(props)
-    context['script'] = script
-    context['div'] = div
+    context['script'] = chart_ndvi['script']
+    context['div'] = chart_ndvi['div']
     context['bbox'] = [[bbox[1],bbox[0]],[bbox[3],bbox[2]]]
     context["props"] = props
     context["tiles"] = ndvi__['tiles']

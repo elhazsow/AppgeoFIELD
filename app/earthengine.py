@@ -99,7 +99,6 @@ def ee_get_image(START_DATE , END_DATE, CLOUD_FILTER, CLD_PRB_THRESH, NIR_DRK_TH
 
 
 
-
     s2_sr_cld_col = get_s2_sr_cld_col(AOI, START_DATE, END_DATE)
 
     s2_sr_median = (s2_sr_cld_col.map(add_cld_shdw_mask)
@@ -107,7 +106,7 @@ def ee_get_image(START_DATE , END_DATE, CLOUD_FILTER, CLD_PRB_THRESH, NIR_DRK_TH
                                 .median()).clip(AOI)
     
     
-    #calcul de NDVI :permer de détecter la végétation
+    #calcul de NDVI :permet  de détecter la végétation
 
     ndvi = s2_sr_median.normalizedDifference(['B8','B4']).rename('ndvi')
 
@@ -145,7 +144,7 @@ def get_map_tiles(image,bands,visParams):
     tile = ee.data.getTileUrl(map_id_dict, 123,4567, 8)
     tiles = tile.replace("/tiles/8/123/4567", "/tiles/{z}/{x}/{y}")
     
-    
+    # data = ee.data.getInfo(map_id_dict)
     
     # tiles = map_id_dict['tile_fetcher'].url_format
     attr = 'Map Data &copy; <a href="https://earthengine.google.com/">Google Earth Engine</a>'

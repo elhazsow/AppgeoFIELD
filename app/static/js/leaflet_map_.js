@@ -67,6 +67,17 @@ function style(feature) {
 
 
 var layer_ndvi;
+// spinner add() and remove()
+var spinner = document.getElementById('spinner')
+
+function addspin(){
+  spinner.classList.add('loader')
+}
+
+function removespin(){
+  spinner.classList.remove('loader')
+}
+
 
 var ndvi_add =  function(){
 
@@ -76,7 +87,7 @@ var ndvi_add =  function(){
   if(layer_ndvi){
    
     layer_ndvi.setUrl(tiles, noRedraw = false);
-   
+    
     return;
     
   }
@@ -86,14 +97,13 @@ var ndvi_add =  function(){
     pane:'ndvi'})
 
  
-  map.layerscontrol.addOverlay(layer_ndvi, "ndvi");
+  map.layerscontrol.addOverlay(layer_ndvi, "Ndvi");
   layer_ndvi.addTo(map);
   
   // tiles=tiles.textContent
   // map.createPane('ndvi');
   // map.getPane('ndvi').style.zIndex = 450; 
 };
-  
   
   
 
@@ -134,25 +144,27 @@ function highlightFeature(e) {
 // reset the style of the layer
 
 
-
 function resetHighlight(e) {
 
   info.update();
   elements.resetStyle(e.target)};
 
 
- 
 function zoomToFeature(e) {
-
+  
   var layer = e.target;
   var id = layer.feature.id;
-  // var spinner = document.getElementById('#spinner')
-  // spinner.classList.toggle('loader')
+  //////////////
+  addspin()
+  ////////////////
   $.ajax({url: String(id), success: function(result){  //ajax request on the bokeh_chart view
     $(".container_chart").html(result);
   }});
   map.fitBounds(e.target.getBounds());
-  
+  ////////////////////////
+  removespin()
+
+
   // console.log(map.getPanes())
   // ndvi_add()
   

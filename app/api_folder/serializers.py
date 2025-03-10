@@ -1,6 +1,6 @@
 from rest_framework_gis import serializers # type: ignore
 
-from app.models import ZonesProtgesDuSngal ,ImageFile
+from app.models import ZonesProtgesDuSngal, ImageFile
 
 
 
