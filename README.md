@@ -1,4 +1,4 @@
-# GeoDjango Project
+# APPgeoFIELD
 
 ## Description
 GeoDjango Project is a web application built with Django and GeoDjango, designed to manage and visualize geographic data. It provides tools for users to efficiently handle spatial data, perform geospatial queries, and render maps.
