@@ -10,3 +10,4 @@ media/
 staticfiles/
 .env
 config
+data/ee_config  
