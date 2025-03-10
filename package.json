@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@google/earthengine": "^1.4.2"
+  }
+}

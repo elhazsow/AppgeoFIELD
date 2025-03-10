@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    
+        {% csrf_token %}
+        <input 
+        class="form-control me-2"
+        hx-post="{% url "search_element" %}"
+        hx-trigger="keyup changed delay:500ms"
+        type="text" placeholder="search..."
+        hx-target=".list-lieux"
+        name='search'
+        >
+        
+</div>
+
+<div class="list-lieux" id='list'>
+        Résultats de recherche
+</div>

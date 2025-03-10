@@ -1,0 +1,51 @@
+{% extends 'html/base.html' %}
+{% load leaflet_tags %}
+{% load geojson_tags %}
+
+
+    {% block head %}
+    <title>{{ site.nom }}</title>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    {% endblock %}
+    
+   
+
+    {%block content%}
+
+        <h1>{{ site.nom }}</h1>
+        <p>{{ site.superf_ha_field}} ha</p>
+
+        <div id="map" class="map">
+
+            {% leaflet_map "map" callback="myfunct" %}
+        
+        </div>
+        <!-- <div id="map" class="map">
+        {% leaflet_map "map_"  %}
+        </div> -->
+        <script type="text/JavaScript">
+            var popupContent=`
+    <div class="popup-content">
+        <img src="https://via.placeholder.com/300x150" alt="Image de description" class="popup-image">
+        <ul>
+            <li>Élément de liste 1</li>
+            <li>Élément de liste 2</li>
+            <li>Élément de liste 3</li>
+        </ul>
+        <p>Voici une description de l'image et de la liste. Ce texte est un exemple pour montrer...</p>
+        <a href="https://example.com" target="_blank" class="voir-plus">Voir plus</a>
+    </div>
+`;
+           
+        var myfunct = function (map,options){
+        var data={{ site.geom|geojsonfeature|safe }}
+        console.log(data);
+        var elements = L.geoJson( data ).addTo(map);
+            map.fitBounds(elements.getBounds());
+        elements.bindPopup(popupContent).openOn(map).addTo(map)
+        // var popup = L.popup().setContent('<p>{{ site.nom }}<br />Superficie:{{ site.superf_ha_field }}</p>').openOn(map);
+        // popup.addTo(map)
+        };
+        </script>
+    {% endblock %}

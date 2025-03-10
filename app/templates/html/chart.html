@@ -1,0 +1,46 @@
+<div class="chartBox">
+  <canvas id="line_chart" ></canvas>
+</div>
+  <script>
+      var canvas = document.getElementById('line_chart');
+      ctx = canvas.getContext('2d');
+
+      // trying to convert to JS dates here
+      var labels = [];
+      var nom='# NDVI : ' + "{{nom|safe}}"
+
+      {% for d in dates %}
+      labels.push(new Date("{{ d.isoformat }}").toISOString().slice(0, 10));
+      {% endfor %}
+
+      ///////////////////////////chart///////////////////////////////
+
+    var mychart = new Chart(ctx, {
+      type: 'line',
+      data : {
+        labels: labels,
+        datasets: [{
+          label: nom,
+          data: {{data|safe}},
+          fill: false,
+          borderColor: 'rgb(10, 245, 20)',
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive:true,
+        maintainAspectRatio: false,
+        scales: {
+          {% comment %} y:{
+            beginAtZero:true
+          }, {% endcomment %}
+          x: {
+              type: 'time',
+              
+          }
+        }
+    }
+  });
+
+  </script>
+
