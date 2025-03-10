@@ -4,7 +4,7 @@
 GeoDjango Project is a web application built with Django and GeoDjango, designed to manage and visualize geographic data. It provides tools for users to efficiently handle spatial data, perform geospatial queries, and render maps.
  It aims to provide insights for farmers by offering vegetation indices such as NDVI (Normalized Difference Vegetation Index), CGI (Crop Growth Index), and NDWI (Normalized Difference Water Index).
 
- ![App screen shot](/data/CaptureAppGeo.png?raw=true "CaptureAppGeo")
+ ![App screen shot](/data/CaptureAppGeo.png?raw=true)
 
 ## Installation
 Follow these steps to install and set up the project locally:
