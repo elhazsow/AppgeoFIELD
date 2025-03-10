@@ -59,7 +59,7 @@ To use the project, follow these steps:
 1. Open your web browser and go to `http://127.0.0.1:8000/`.
 2. Log in with the superuser credentials you created.
 3. Start managing and visualizing your geographic data.
-![App screen shot](data/CaptureAppGeo.png?raw=true "CaptureAppGeo")
+![App screen shot](data/CaptureAppGeo.png?raw=true)
 
 
 ## License
