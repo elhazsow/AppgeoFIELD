@@ -38,7 +38,7 @@ GEOS_LIBRARY_PATH=r'.env/Lib/site-packages/osgeo/geos_c.dll'
 
 
 
-#leaflet setting
+#leaflet setting#####################################################################
 
 LEAFLET_CONFIG = {
     'SPATIAL_EXTENT': (-11, 11,-18.5,18),
@@ -100,7 +100,7 @@ INSTALLED_APPS = [
     'app',
     'leaflet',
     'djgeojson',
-    'django_large_image',
+    'django_large_image', # did not use it here!
     
 ]
 
@@ -142,9 +142,9 @@ WSGI_APPLICATION = 'webgis.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'geo_protegees',
-        'USER': 'postgres',
-        'PASSWORD': 'Elhaz492878@',
+        'NAME': 'Yourdbname',
+        'USER': 'username',
+        'PASSWORD': 'yourpassword',
         'HOST': 'localhost',
         'PORT': ''
     }
