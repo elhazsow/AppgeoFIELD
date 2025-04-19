@@ -8,7 +8,7 @@ GeoDjango Project is a web application built with Django and GeoDjango, designed
 
 ## Installation
 Follow these steps to install and set up the project locally:
-Sign up for Google Earth Engine [here](https://earthengine.google.com/signup/) and [here also](https://developers.google.com/earth-engine/guides/auth?hl=fr#credentials_for_service_accounts_and_compute_engine).
+Sign up for Google Earth Engine [here](https://earthengine.google.com/signup/) and [deploy app engine with Earth Engine]((https://developers.google.com/earth-engine/guides/app_engine_intro?hl=fr#deploying-app-engine-apps-with-earth-engine).
 
 1. **Clone the repository:**
     ```bash
